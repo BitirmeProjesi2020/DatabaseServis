@@ -1,4 +1,4 @@
-package com.bitirime2020.database;
+package com.bitirime2020.databasemanagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
