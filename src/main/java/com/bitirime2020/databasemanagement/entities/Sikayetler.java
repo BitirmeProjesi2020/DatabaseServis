@@ -12,9 +12,6 @@ public class Sikayetler {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "sikayeti_yapan_kisi")
-    private int sikayetiYapanKisi;
-
     @Column(name = "banka_id")
     private int bankaId;
 
@@ -27,6 +24,10 @@ public class Sikayetler {
     @Column(name = "sikayet_icerigi")
     private String sikayetIcerigi;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "sikayet_kategorisi")
+    private BankaKategorileri sikayetKategorisi;
+
     @Column(name = "sikayet_tarihi")
     private LocalDateTime sikayetTarihi;
 
@@ -36,16 +37,9 @@ public class Sikayetler {
     @Column(name = "is_show_name")
     private Boolean isShowName;
 
-    public Sikayetler(int sikayetiYapanKisi, int bankaId, String sikayetBasligi, String sikayetTelefonNo, String sikayetIcerigi, LocalDateTime sikayetTarihi, Boolean isSolved, Boolean isShowName) {
-        this.sikayetiYapanKisi = sikayetiYapanKisi;
-        this.bankaId = bankaId;
-        this.sikayetBasligi = sikayetBasligi;
-        this.sikayetTelefonNo = sikayetTelefonNo;
-        this.sikayetIcerigi = sikayetIcerigi;
-        this.sikayetTarihi = sikayetTarihi;
-        this.isSolved = isSolved;
-        this.isShowName = isShowName;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "sikayeti_yapan_kisi")
+    private Kullanicilar kullanici;
 
     public Sikayetler() {
     }
@@ -58,12 +52,12 @@ public class Sikayetler {
         this.id = id;
     }
 
-    public int getSikayetiYapanKisi() {
-        return sikayetiYapanKisi;
+    public String getKullanici() {
+        return kullanici.getAdSoyad();
     }
 
-    public void setSikayetiYapanKisi(int sikayetiYapanKisi) {
-        this.sikayetiYapanKisi = sikayetiYapanKisi;
+    public void setKullanici(Kullanicilar kullanicilar) {
+        this.kullanici = kullanicilar;
     }
 
     public int getBankaId() {
@@ -96,6 +90,14 @@ public class Sikayetler {
 
     public void setSikayetIcerigi(String sikayetIcerigi) {
         this.sikayetIcerigi = sikayetIcerigi;
+    }
+
+    public String getSikayetKategorisi() {
+        return sikayetKategorisi.getKategoriAdi();
+    }
+
+    public void setSikayetKategorisi(BankaKategorileri sikayetKategorisi) {
+        this.sikayetKategorisi = sikayetKategorisi;
     }
 
     public LocalDateTime getSikayetTarihi() {

@@ -23,16 +23,9 @@ public class BankaCalisanlari {
     @Column(name = "calistigi_banka")
     private int calistigiBanka;
 
-    @Column(name = "calistigi_departman")
-    private int calistigiDepartman;
-
-    public BankaCalisanlari(String adSoyad, String email, String password, int calistigiBanka, int calistigiDepartman) {
-        this.adSoyad = adSoyad;
-        this.email = email;
-        this.password = password;
-        this.calistigiBanka = calistigiBanka;
-        this.calistigiDepartman = calistigiDepartman;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "calistigi_departman")
+    private BankaKategorileri calistigiDepartman;
 
     public BankaCalisanlari() {
     }
@@ -77,11 +70,11 @@ public class BankaCalisanlari {
         this.calistigiBanka = calistigiBanka;
     }
 
-    public int getCalistigiDepartman() {
-        return calistigiDepartman;
+    public String  getCalistigiDepartman() {
+        return calistigiDepartman.getKategoriAdi();
     }
 
-    public void setCalistigiDepartman(int calistigiDepartman) {
+    public void setCalistigiDepartman(BankaKategorileri calistigiDepartman) {
         this.calistigiDepartman = calistigiDepartman;
     }
 }

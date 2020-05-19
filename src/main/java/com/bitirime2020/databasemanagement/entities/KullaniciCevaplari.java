@@ -11,24 +11,19 @@ public class KullaniciCevaplari {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "kullanicilarid")
-    private int kullanicilarId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "kullanicilarid")
+    private Kullanicilar kullanici;
 
-    @Column(name = "sikayetlerid")
-    private int sikayetlerId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "sikayetlerid")
+    private Sikayetler sikayetlerId;
 
     @Column(name = "mesaj")
     private String mesaj;
 
     @Column(name = "cevap_tarihi")
     private LocalDateTime cevapTarihi;
-
-    public KullaniciCevaplari(int kullanicilarId, int sikayetlerId, String mesaj, LocalDateTime cevapTarihi) {
-        this.kullanicilarId = kullanicilarId;
-        this.sikayetlerId = sikayetlerId;
-        this.mesaj = mesaj;
-        this.cevapTarihi = cevapTarihi;
-    }
 
     public KullaniciCevaplari() {
     }
@@ -41,19 +36,19 @@ public class KullaniciCevaplari {
         this.id = id;
     }
 
-    public int getKullanicilarId() {
-        return kullanicilarId;
+    public String getKullanici() {
+        return kullanici.getAdSoyad();
     }
 
-    public void setKullanicilarId(int kullanicilarId) {
-        this.kullanicilarId = kullanicilarId;
+    public void setKullanici(Kullanicilar kullanici) {
+        this.kullanici = kullanici;
     }
 
     public int getSikayetlerId() {
-        return sikayetlerId;
+        return sikayetlerId.getId();
     }
 
-    public void setSikayetlerId(int sikayetlerId) {
+    public void setSikayetlerId(Sikayetler sikayetlerId) {
         this.sikayetlerId = sikayetlerId;
     }
 
