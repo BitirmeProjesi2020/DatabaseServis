@@ -1,6 +1,7 @@
 package com.bitirime2020.databasemanagement.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "banka_calisanlari")
@@ -20,12 +21,17 @@ public class BankaCalisanlari {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "calistigi_banka")
-    private int calistigiBanka;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "calistigi_banka")
+    private Bankalar calistigiBanka;
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "calistigi_departman")
     private BankaKategorileri calistigiDepartman;
+
+    @OneToMany(mappedBy = "bankaCalisanlariId", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList;
 
     public BankaCalisanlari() {
     }
@@ -62,11 +68,11 @@ public class BankaCalisanlari {
         this.password = password;
     }
 
-    public int getCalistigiBanka() {
-        return calistigiBanka;
+    public String  getCalistigiBanka() {
+        return calistigiBanka.getAd();
     }
 
-    public void setCalistigiBanka(int calistigiBanka) {
+    public void setCalistigiBanka(Bankalar calistigiBanka) {
         this.calistigiBanka = calistigiBanka;
     }
 
@@ -76,5 +82,13 @@ public class BankaCalisanlari {
 
     public void setCalistigiDepartman(BankaKategorileri calistigiDepartman) {
         this.calistigiDepartman = calistigiDepartman;
+    }
+
+    public List<BankaCalisanlariCevaplari> getBankaCalisanlariCevaplariList() {
+        return bankaCalisanlariCevaplariList;
+    }
+
+    public void setBankaCalisanlariCevaplariList(List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList) {
+        this.bankaCalisanlariCevaplariList = bankaCalisanlariCevaplariList;
     }
 }

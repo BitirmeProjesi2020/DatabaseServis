@@ -2,6 +2,7 @@ package com.bitirime2020.databasemanagement.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "sikayetler")
@@ -12,8 +13,9 @@ public class Sikayetler {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "banka_id")
-    private int bankaId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "banka_id")
+    private Bankalar bankaId;
 
     @Column(name = "sikayet_basligi")
     private String sikayetBasligi;
@@ -41,6 +43,12 @@ public class Sikayetler {
     @JoinColumn(name = "sikayeti_yapan_kisi")
     private Kullanicilar kullanici;
 
+    @OneToMany(mappedBy = "kullanici", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private List<KullaniciCevaplari> kullaniciCevaplariList;
+
+    @OneToMany(mappedBy = "sikayetlerId", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList;
+
     public Sikayetler() {
     }
 
@@ -60,11 +68,11 @@ public class Sikayetler {
         this.kullanici = kullanicilar;
     }
 
-    public int getBankaId() {
-        return bankaId;
+    public String getBankaId() {
+        return bankaId.getAd();
     }
 
-    public void setBankaId(int bankaId) {
+    public void setBankaId(Bankalar bankaId) {
         this.bankaId = bankaId;
     }
 
@@ -122,5 +130,21 @@ public class Sikayetler {
 
     public void setShowName(Boolean showName) {
         isShowName = showName;
+    }
+
+    public List<KullaniciCevaplari> getKullaniciCevaplariList() {
+        return kullaniciCevaplariList;
+    }
+
+    public void setKullaniciCevaplariList(List<KullaniciCevaplari> kullaniciCevaplariList) {
+        this.kullaniciCevaplariList = kullaniciCevaplariList;
+    }
+
+    public List<BankaCalisanlariCevaplari> getBankaCalisanlariCevaplariList() {
+        return bankaCalisanlariCevaplariList;
+    }
+
+    public void setBankaCalisanlariCevaplariList(List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList) {
+        this.bankaCalisanlariCevaplariList = bankaCalisanlariCevaplariList;
     }
 }
