@@ -1,7 +1,6 @@
 package com.bitirime2020.databasemanagement.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "banka_calisanlari")
@@ -25,13 +24,10 @@ public class BankaCalisanlari {
     @JoinColumn(name = "calistigi_banka")
     private Bankalar calistigiBanka;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "calistigi_departman")
     private BankaKategorileri calistigiDepartman;
 
-    @OneToMany(mappedBy = "bankaCalisanlariId", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList;
 
     public BankaCalisanlari() {
     }
@@ -82,13 +78,5 @@ public class BankaCalisanlari {
 
     public void setCalistigiDepartman(BankaKategorileri calistigiDepartman) {
         this.calistigiDepartman = calistigiDepartman;
-    }
-
-    public List<BankaCalisanlariCevaplari> getBankaCalisanlariCevaplariList() {
-        return bankaCalisanlariCevaplariList;
-    }
-
-    public void setBankaCalisanlariCevaplariList(List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList) {
-        this.bankaCalisanlariCevaplariList = bankaCalisanlariCevaplariList;
     }
 }

@@ -21,12 +21,6 @@ public class Kullanicilar {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "kullanici", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private List<Sikayetler> sikayetlerList;
-
-    @OneToMany(mappedBy = "kullanici", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private List<KullaniciCevaplari> KullaniciCevaplariList;
-
     public Kullanicilar() {
     }
 
@@ -60,17 +54,5 @@ public class Kullanicilar {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Sikayetler> getSikayetlerList() {
-        return sikayetlerList;
-    }
-
-    public List<KullaniciCevaplari> getKullaniciCevaplariList() {
-        return KullaniciCevaplariList;
-    }
-
-    public void setKullaniciCevaplariList(List<KullaniciCevaplari> kullaniciCevaplariList) {
-        KullaniciCevaplariList = kullaniciCevaplariList;
     }
 }

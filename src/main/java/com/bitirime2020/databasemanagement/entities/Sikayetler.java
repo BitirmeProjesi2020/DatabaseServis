@@ -2,7 +2,6 @@ package com.bitirime2020.databasemanagement.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "sikayetler")
@@ -42,12 +41,6 @@ public class Sikayetler {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "sikayeti_yapan_kisi")
     private Kullanicilar kullanici;
-
-    @OneToMany(mappedBy = "kullanici", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private List<KullaniciCevaplari> kullaniciCevaplariList;
-
-    @OneToMany(mappedBy = "sikayetlerId", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    private List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList;
 
     public Sikayetler() {
     }
@@ -130,21 +123,5 @@ public class Sikayetler {
 
     public void setShowName(Boolean showName) {
         isShowName = showName;
-    }
-
-    public List<KullaniciCevaplari> getKullaniciCevaplariList() {
-        return kullaniciCevaplariList;
-    }
-
-    public void setKullaniciCevaplariList(List<KullaniciCevaplari> kullaniciCevaplariList) {
-        this.kullaniciCevaplariList = kullaniciCevaplariList;
-    }
-
-    public List<BankaCalisanlariCevaplari> getBankaCalisanlariCevaplariList() {
-        return bankaCalisanlariCevaplariList;
-    }
-
-    public void setBankaCalisanlariCevaplariList(List<BankaCalisanlariCevaplari> bankaCalisanlariCevaplariList) {
-        this.bankaCalisanlariCevaplariList = bankaCalisanlariCevaplariList;
     }
 }
