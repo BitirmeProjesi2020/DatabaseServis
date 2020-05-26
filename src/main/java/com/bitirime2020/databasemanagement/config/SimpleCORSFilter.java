@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+//https://stackoverflow.com/questions/32319396/cors-with-spring-boot-and-angularjs-not-working
 
 @Component
 public class SimpleCORSFilter implements Filter {

@@ -1,7 +1,7 @@
 package com.bitirime2020.databasemanagement.entities;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.*;
 
 @Entity
 @Table(name = "sikayetler")
@@ -12,9 +12,8 @@ public class Sikayetler {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "banka_id")
-    private Bankalar bankaId;
+    @Column(name = "banka_id")
+    private int bankaId;
 
     @Column(name = "sikayet_basligi")
     private String sikayetBasligi;
@@ -25,9 +24,8 @@ public class Sikayetler {
     @Column(name = "sikayet_icerigi")
     private String sikayetIcerigi;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "sikayet_kategorisi")
-    private BankaKategorileri sikayetKategorisi;
+    @Column(name = "sikayet_kategorisi")
+    private int sikayetKategorisi;
 
     @Column(name = "sikayet_tarihi")
     private LocalDateTime sikayetTarihi;
@@ -38,9 +36,8 @@ public class Sikayetler {
     @Column(name = "is_show_name")
     private Boolean isShowName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "sikayeti_yapan_kisi")
-    private Kullanicilar kullanici;
+    @Column(name = "sikayeti_yapan_kisi")
+    private int kullanici;
 
     public Sikayetler() {
     }
@@ -53,19 +50,19 @@ public class Sikayetler {
         this.id = id;
     }
 
-    public String getKullanici() {
-        return kullanici.getAdSoyad();
+    public int getKullanici() {
+        return kullanici;
     }
 
-    public void setKullanici(Kullanicilar kullanicilar) {
-        this.kullanici = kullanicilar;
+    public void setKullanici(int kullanici) {
+        this.kullanici = kullanici;
     }
 
-    public String getBankaId() {
-        return bankaId.getAd();
+    public int getBankaId() {
+        return bankaId;
     }
 
-    public void setBankaId(Bankalar bankaId) {
+    public void setBankaId(int bankaId) {
         this.bankaId = bankaId;
     }
 
@@ -93,16 +90,17 @@ public class Sikayetler {
         this.sikayetIcerigi = sikayetIcerigi;
     }
 
-    public String getSikayetKategorisi() {
-        return sikayetKategorisi.getKategoriAdi();
+    public int getSikayetKategorisi() {
+        return sikayetKategorisi;
     }
 
-    public void setSikayetKategorisi(BankaKategorileri sikayetKategorisi) {
+    public void setSikayetKategorisi(int sikayetKategorisi) {
         this.sikayetKategorisi = sikayetKategorisi;
     }
 
-    public LocalDateTime getSikayetTarihi() {
-        return sikayetTarihi;
+    public Long getSikayetTarihi() {
+        ZonedDateTime zdt = ZonedDateTime.of(sikayetTarihi, ZoneId.of("Europe/Istanbul"));
+        return zdt.toInstant().toEpochMilli();
     }
 
     public void setSikayetTarihi(LocalDateTime sikayetTarihi) {
