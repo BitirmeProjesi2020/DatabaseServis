@@ -2,6 +2,8 @@ package com.bitirime2020.databasemanagement.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "kullanici_cevaplari")
@@ -11,13 +13,11 @@ public class KullaniciCevaplari {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "kullanicilarid")
-    private Kullanicilar kullanici;
+    @Column(name = "kullanicilarid")
+    private int kullanici;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "sikayetlerid")
-    private Sikayetler sikayetlerId;
+    @Column(name = "sikayetlerid")
+    private int sikayetlerId;
 
     @Column(name = "mesaj")
     private String mesaj;
@@ -36,19 +36,19 @@ public class KullaniciCevaplari {
         this.id = id;
     }
 
-    public String getKullanici() {
-        return kullanici.getAdSoyad();
+    public int getKullanici() {
+        return kullanici;
     }
 
-    public void setKullanici(Kullanicilar kullanici) {
+    public void setKullanici(int kullanici) {
         this.kullanici = kullanici;
     }
 
     public int getSikayetlerId() {
-        return sikayetlerId.getId();
+        return sikayetlerId;
     }
 
-    public void setSikayetlerId(Sikayetler sikayetlerId) {
+    public void setSikayetlerId(int sikayetlerId) {
         this.sikayetlerId = sikayetlerId;
     }
 
@@ -60,8 +60,9 @@ public class KullaniciCevaplari {
         this.mesaj = mesaj;
     }
 
-    public LocalDateTime getCevapTarihi() {
-        return cevapTarihi;
+    public Long getCevapTarihi() {
+        ZonedDateTime zdt = ZonedDateTime.of(cevapTarihi, ZoneId.of("Europe/Istanbul"));
+        return zdt.toInstant().toEpochMilli();
     }
 
     public void setCevapTarihi(LocalDateTime cevapTarihi) {

@@ -2,6 +2,8 @@ package com.bitirime2020.databasemanagement.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "banka_calisanlari_cevaplari")
@@ -12,13 +14,11 @@ public class BankaCalisanlariCevaplari {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "banka_calisanlariid")
-    private BankaCalisanlari bankaCalisanlariId;
+    @Column(name = "banka_calisanlariid")
+    private int bankaCalisanlariId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "sikayetlerid")
-    private Sikayetler sikayetlerId;
+    @Column(name = "sikayetlerid")
+    private int sikayetlerId;
 
     @Column(name = "mesaj")
     private String mesaj;
@@ -37,19 +37,19 @@ public class BankaCalisanlariCevaplari {
         this.id = id;
     }
 
-    public String  getBankaCalisanlariId() {
-        return bankaCalisanlariId.getAdSoyad();
+    public int getBankaCalisanlariId() {
+        return bankaCalisanlariId;
     }
 
-    public void setBankaCalisanlariId(BankaCalisanlari bankaCalisanlariId) {
+    public void setBankaCalisanlariId(int bankaCalisanlariId) {
         this.bankaCalisanlariId = bankaCalisanlariId;
     }
 
     public int getSikayetlerId() {
-        return sikayetlerId.getId();
+        return sikayetlerId;
     }
 
-    public void setSikayetlerId(Sikayetler sikayetlerId) {
+    public void setSikayetlerId(int sikayetlerId) {
         this.sikayetlerId = sikayetlerId;
     }
 
@@ -61,8 +61,9 @@ public class BankaCalisanlariCevaplari {
         this.mesaj = mesaj;
     }
 
-    public LocalDateTime getCevapTarihi() {
-        return cevapTarihi;
+    public Long getCevapTarihi() {
+        ZonedDateTime zdt = ZonedDateTime.of(cevapTarihi, ZoneId.of("Europe/Istanbul"));
+        return zdt.toInstant().toEpochMilli();
     }
 
     public void setCevapTarihi(LocalDateTime cevapTarihi) {
