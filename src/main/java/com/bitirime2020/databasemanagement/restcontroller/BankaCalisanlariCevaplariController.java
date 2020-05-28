@@ -41,4 +41,9 @@ public class BankaCalisanlariCevaplariController {
     public BankaCalisanlariCevaplari getById(int id) {
         return iBankaCalisanlariCevaplariService.getById(id);
     }
+
+    @GetMapping("/getRecentSikayet")
+    public List<BankaCalisanlariCevaplari> getRecentSikayet(int sikayetid) {
+        return iBankaCalisanlariCevaplariService.getRecentSikayet(sikayetid);
+    }
 }

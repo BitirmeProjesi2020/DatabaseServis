@@ -41,4 +41,9 @@ public class KullaniciCevaplariController {
     public KullaniciCevaplari getById(int id) {
         return iKullaniciCevaplariService.getById(id);
     }
+
+    @GetMapping("/getRecentSikayet")
+    public List<KullaniciCevaplari> getRecentSikayet(int sikayetid) {
+        return iKullaniciCevaplariService.getRecentSikayet(sikayetid);
+    }
 }

@@ -42,4 +42,9 @@ public class KullaniciCevaplariService implements IKullaniciCevaplariService {
     public KullaniciCevaplari getById(int id) {
         return this.iKullaniciCevaplariDAO.getById(id);
     }
+
+    @Override
+    public List<KullaniciCevaplari> getRecentSikayet(int sikayetid) {
+        return this.iKullaniciCevaplariDAO.getRecentSikayet(sikayetid);
+    }
 }

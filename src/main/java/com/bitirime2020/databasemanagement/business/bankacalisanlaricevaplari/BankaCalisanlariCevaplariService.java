@@ -41,4 +41,9 @@ public class BankaCalisanlariCevaplariService implements IBankaCalisanlariCevapl
     public BankaCalisanlariCevaplari getById(int id) {
         return this.iBankaCalisanlariCevaplariDAO.getById(id);
     }
+
+    @Override
+    public List<BankaCalisanlariCevaplari> getRecentSikayet(int sikayetid) {
+        return iBankaCalisanlariCevaplariDAO.getRecentSikayet(sikayetid);
+    }
 }

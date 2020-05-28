@@ -10,4 +10,5 @@ public interface IBankaCalisanlariCevaplariService {
     void update(BankaCalisanlariCevaplari bankaCalisanlariCevaplari);
     void delete(int id);
     BankaCalisanlariCevaplari getById(int id);
+    List<BankaCalisanlariCevaplari> getRecentSikayet(int sikayetid);
 }

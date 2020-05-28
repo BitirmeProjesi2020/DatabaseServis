@@ -54,4 +54,10 @@ public class HibernateKullaniciCevaplariDAO implements IKullaniciCevaplariDAO {
         Session session = entityManager.unwrap(Session.class);
         return session.get(KullaniciCevaplari.class, id);
     }
+
+    @Override
+    public List<KullaniciCevaplari> getRecentSikayet(int sikayetid) {
+        Session session = entityManager.unwrap(Session.class);
+        return session.createQuery("from KullaniciCevaplari where sikayetlerId=" + sikayetid, KullaniciCevaplari.class).getResultList();
+    }
 }

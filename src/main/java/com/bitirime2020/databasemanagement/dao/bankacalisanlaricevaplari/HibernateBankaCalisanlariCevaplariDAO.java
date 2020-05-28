@@ -1,6 +1,7 @@
 package com.bitirime2020.databasemanagement.dao.bankacalisanlaricevaplari;
 
 import com.bitirime2020.databasemanagement.entities.BankaCalisanlariCevaplari;
+import com.bitirime2020.databasemanagement.entities.KullaniciCevaplari;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,5 +54,11 @@ public class HibernateBankaCalisanlariCevaplariDAO implements IBankaCalisanlariC
     public BankaCalisanlariCevaplari getById(int id) {
         Session session = entityManager.unwrap(Session.class);
         return session.get(BankaCalisanlariCevaplari.class, id);
+    }
+
+    @Override
+    public List<BankaCalisanlariCevaplari> getRecentSikayet(int sikayetid) {
+        Session session = entityManager.unwrap(Session.class);
+        return session.createQuery("from BankaCalisanlariCevaplari where sikayetlerId=" + sikayetid, BankaCalisanlariCevaplari.class).getResultList();
     }
 }

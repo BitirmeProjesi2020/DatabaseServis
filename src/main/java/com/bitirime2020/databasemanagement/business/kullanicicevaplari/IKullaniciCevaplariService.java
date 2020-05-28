@@ -10,4 +10,5 @@ public interface IKullaniciCevaplariService {
     void update(KullaniciCevaplari kullaniciCevaplari);
     void delete(int id);
     KullaniciCevaplari getById(int id);
+    List<KullaniciCevaplari> getRecentSikayet(int sikayetid);
 }
