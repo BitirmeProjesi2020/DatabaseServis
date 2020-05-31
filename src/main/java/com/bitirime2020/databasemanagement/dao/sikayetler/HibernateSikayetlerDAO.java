@@ -23,7 +23,7 @@ public class HibernateSikayetlerDAO implements ISikayetlerDAO{
     @Transactional
     public List<Sikayetler> getAll() {
         Session session = entityManager.unwrap(Session.class);
-        return session.createQuery("from Sikayetler", Sikayetler.class).getResultList();
+        return session.createQuery("from Sikayetler order by sikayetTarihi desc", Sikayetler.class).getResultList();
     }
 
     @Override
