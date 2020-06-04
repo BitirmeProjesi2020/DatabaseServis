@@ -32,8 +32,8 @@ public class KullaniciCevaplariController {
         iKullaniciCevaplariService.update(kullaniciCevaplari);
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody int id) {
+    @GetMapping("/delete")
+    public void delete(int id) {
         iKullaniciCevaplariService.delete(id);
     }
 

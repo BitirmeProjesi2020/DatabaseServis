@@ -32,8 +32,8 @@ public class KullanicilarController {
         iKullanicilarService.update(kullanicilar);
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody int id) {
+    @GetMapping("/delete")
+    public void delete(int id) {
         iKullanicilarService.delete(id);
     }
 

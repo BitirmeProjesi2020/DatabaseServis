@@ -32,8 +32,8 @@ public class SikayetlerController {
         iSikayetlerService.update(sikayetler);
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody int id) {
+    @GetMapping("/delete")
+    public void delete(int id) {
         iSikayetlerService.delete(id);
     }
 

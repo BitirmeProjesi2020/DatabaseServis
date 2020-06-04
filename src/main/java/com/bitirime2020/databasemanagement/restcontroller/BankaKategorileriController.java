@@ -32,8 +32,8 @@ public class BankaKategorileriController {
         iBankaKategorileriService.update(bankaKategorileri);
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody int id) {
+    @GetMapping("/delete")
+    public void delete(int id) {
         iBankaKategorileriService.delete(id);
     }
 
