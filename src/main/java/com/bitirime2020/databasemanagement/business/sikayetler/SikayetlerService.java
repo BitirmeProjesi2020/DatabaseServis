@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -27,12 +30,15 @@ public class SikayetlerService implements ISikayetlerService {
     @Override
     @Transactional
     public void add(Sikayetler sikayetler) {
+        sikayetler.setSikayetTarihi(LocalDateTime.now());
         this.iSikayetlerDAO.add(sikayetler);
     }
 
     @Override
     @Transactional
     public void update(Sikayetler sikayetler) {
+        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(iSikayetlerDAO.getById(sikayetler.getId()).getSikayetTarihi()), ZoneId.systemDefault());
+        sikayetler.setSikayetTarihi(date);
         this.iSikayetlerDAO.update(sikayetler);
     }
 

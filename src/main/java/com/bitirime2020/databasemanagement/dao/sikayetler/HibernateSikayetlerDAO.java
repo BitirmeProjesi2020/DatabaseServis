@@ -37,6 +37,8 @@ public class HibernateSikayetlerDAO implements ISikayetlerDAO{
     @Transactional
     public void update(Sikayetler sikayetler) {
         Session session = entityManager.unwrap(Session.class);
+        session.flush();
+        session.clear();
         session.saveOrUpdate(sikayetler);
     }
 
